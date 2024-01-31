@@ -1,6 +1,30 @@
-//$bodyColor: cyan;
-$bodyColor: green;
+$bodyColor: #C6A664;
 body {
   background-color: $bodyColor;
-  //background-image: url("./assets/clean code.png");
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1400px;
+  padding: 0 20px;
+  margin: 250px auto 0;
+  box-sizing: border-box;
+  //flex-wrap: wrap;
+}
+
+.field {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);;
+  gap: 5px;
+  background-color: black;
+  margin: 0 auto;
+  &__item {
+    width: 75px;
+    height: 75px;
+    background-color: chartreuse;
+    &_clicked {
+      background-color: black;
+    }
+  }
 }
