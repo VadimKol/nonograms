@@ -4,12 +4,12 @@ export function getRandomInteger(min, max) {
 export function destroyModal() {
   document.querySelector('.modal-back').remove();
 }
-export function feedHints(rowHints, collumnHints, currentRiddle) {
+export function feedHints(rowHints, columnHints, currentRiddle) {
   rowHints.forEach((x) => {
     x.innerText = '';
     return x;
   });
-  collumnHints.forEach((x) => {
+  columnHints.forEach((x) => {
     x.innerText = '';
     return x;
   });
@@ -23,14 +23,14 @@ export function feedHints(rowHints, collumnHints, currentRiddle) {
 
   // тут проблема в том, что в гриде они идут в строчку
   // надо перевернуть для удобства
-  const rotatedCollumnHintsArr = [];
-  for (let i = 0; i < collumnHints.length; i += 1)
+  const rotatedcolumnHintsArr = [];
+  for (let i = 0; i < columnHints.length; i += 1)
     for (let j = 0; j < 3; j += 1)
-      rotatedCollumnHintsArr.push(collumnHints[5 * j + i]);
+      rotatedcolumnHintsArr.push(columnHints[5 * j + i]);
 
-  for (let i = 0, k = 0; i < currentRiddle.collumnclue.length; i += 1) {
-    k += 3 - currentRiddle.collumnclue[i].length;
-    for (let j = 0; j < currentRiddle.collumnclue[i].length; j += 1, k += 1)
-      rotatedCollumnHintsArr[k].append(currentRiddle.collumnclue[i][j]);
+  for (let i = 0, k = 0; i < currentRiddle.columnclue.length; i += 1) {
+    k += 3 - currentRiddle.columnclue[i].length;
+    for (let j = 0; j < currentRiddle.columnclue[i].length; j += 1, k += 1)
+      rotatedcolumnHintsArr[k].append(currentRiddle.columnclue[i][j]);
   }
 }

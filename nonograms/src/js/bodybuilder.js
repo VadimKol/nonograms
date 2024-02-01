@@ -25,13 +25,13 @@ for (let i = 0; i < 15; i += 1) {
   rowclue.append(cell);
 }
 
-const collumnclue = document.createElement('div');
-collumnclue.classList.add('collumnclue');
+const columnclue = document.createElement('div');
+columnclue.classList.add('columnclue');
 
 for (let i = 0; i < 15; i += 1) {
   const cell = document.createElement('div');
-  cell.classList.add('collumnclue__item');
-  collumnclue.append(cell);
+  cell.classList.add('columnclue__item');
+  columnclue.append(cell);
 }
 
 const verticalDivider = document.createElement('div');
@@ -41,7 +41,7 @@ const horisontalDivider = document.createElement('div');
 horisontalDivider.classList.add('hdivider');
 
 field.append(rowclue);
-field.append(collumnclue);
+field.append(columnclue);
 
 field.append(verticalDivider);
 field.append(horisontalDivider);

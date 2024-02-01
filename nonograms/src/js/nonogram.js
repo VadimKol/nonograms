@@ -5,7 +5,7 @@ const fieldCLick = document.querySelector('.field');
 let riddles;
 let currentRiddle;
 const rowHints = document.querySelectorAll('.rowclue__item');
-const collumnHints = document.querySelectorAll('.collumnclue__item');
+const columnHints = document.querySelectorAll('.columnclue__item');
 
 (async () => {
   try {
@@ -20,7 +20,7 @@ const collumnHints = document.querySelectorAll('.collumnclue__item');
     console.log('Current Nonogram is: ');
     currentRiddle.riddle.forEach((x) => console.log(...x));
 
-    feedHints(rowHints, collumnHints, currentRiddle);
+    feedHints(rowHints, columnHints, currentRiddle);
   } catch (err) {
     console.log(err);
   }
@@ -43,7 +43,7 @@ function closeModal() {
   currentRiddle = riddles[getRandomInteger(0, riddles.length - 1)];
 
   // обновляем подсказки
-  feedHints(rowHints, collumnHints, currentRiddle);
+  feedHints(rowHints, columnHints, currentRiddle);
 
   console.log('Current Nonogram is: ');
   currentRiddle.riddle.forEach((x) => console.log(...x));
