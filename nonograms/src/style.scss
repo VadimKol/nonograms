@@ -1,8 +1,21 @@
-$bodyColor: #C6A664;
+@import "variables";
+
+h1, h2, h3, h4, h5, h6, ul, p {
+	padding: 0;
+	margin: 0;
+}
 body {
   background-color: $bodyColor;
 }
-
+button {
+	padding: 0;
+	border:none;
+	line-height: 1;
+	background-color: transparent;
+	&:focus {
+		outline: none;
+	}
+}
 .wrapper {
   display: flex;
   justify-content: space-between;
@@ -27,4 +40,43 @@ body {
       background-color: black;
     }
   }
+}
+
+.modal-back {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(61, 61, 61, 0.70);
+}
+.modal {
+  background-color: white;
+  border-radius: 40px;
+  margin: auto;
+  max-width: 800px;
+  max-height: min-content;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding: 16px;
+  text-align: center;
+  font-size: 50px;
+  &__msg {
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  &__new-btn {
+    padding: 15px;
+    border-radius: 50px;
+    background-color: $btn-back;
+    color: white;
+  }
+}
+
+// js
+.overflow-body {
+  overflow: hidden;
 }

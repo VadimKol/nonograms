@@ -1,0 +1,11 @@
+@use 'sass:color';
+@import "variables";
+
+@media (hover: hover) {
+  button {
+      &:hover {
+          cursor: pointer;
+          background-color: lighten($btn-back, 15%);
+      }
+  }
+}
