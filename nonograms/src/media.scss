@@ -8,4 +8,9 @@
           background-color: lighten($btn-back, 15%);
       }
   }
+  .field__item {
+    &:hover {
+        cursor: pointer;
+    }
+  }
 }

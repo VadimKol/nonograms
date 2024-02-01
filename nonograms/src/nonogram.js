@@ -1,39 +1,29 @@
-import { getRandomInteger, destroyModal } from './helper';
+import { getRandomInteger, destroyModal, feedHints } from './helper';
 
-let riddles = [
-  {
-    riddle: [
-      [0, 1, 1, 1, 0],
-      [0, 1, 0, 1, 0],
-      [0, 1, 1, 1, 0],
-      [0, 1, 0, 1, 0],
-      [0, 1, 1, 1, 0],
-    ],
-  },
-  {
-    riddle: [
-      [0, 1, 1, 1, 0],
-      [0, 1, 0, 0, 0],
-      [0, 1, 1, 1, 0],
-      [0, 0, 0, 1, 0],
-      [0, 1, 1, 1, 0],
-    ],
-  },
-  {
-    riddle: [
-      [1, 0, 0, 0, 1],
-      [0, 1, 0, 1, 0],
-      [0, 0, 1, 0, 0],
-      [0, 1, 0, 1, 0],
-      [1, 0, 0, 0, 1],
-    ],
-  },
-];
+const fieldCLick = document.querySelector('.field');
 
+let riddles;
 let currentRiddle;
-currentRiddle = riddles[getRandomInteger(0, riddles.length - 1)];
+const rowHints = document.querySelectorAll('.rowclue__item');
+const collumnHints = document.querySelectorAll('.collumnclue__item');
 
-console.log(currentRiddle);
+(async () => {
+  try {
+    const responsePromise = await fetch('riddles.json');
+
+    if (responsePromise.ok) {
+      riddles = await responsePromise.json();
+    } else {
+      throw new Error(responsePromise.status);
+    }
+    currentRiddle = riddles[getRandomInteger(0, riddles.length - 1)];
+    console.log(currentRiddle);
+
+    feedHints(rowHints, collumnHints, currentRiddle);
+  } catch (err) {
+    console.log(err);
+  }
+})();
 
 function closeModal() {
   // playAgainBtn.removeEventListener("click", closeModal);// не надо я так понял, если .remove() нода
@@ -41,16 +31,18 @@ function closeModal() {
   destroyModal();
 
   // восстанавлием поле
-  while (document.querySelector('.field__item_clicked') !== null) {
+  while (document.querySelector('.field__item_clicked') !== null)
     document
       .querySelector('.field__item_clicked')
       .classList.toggle('field__item_clicked');
-  }
 
   // берем новую загадку
   riddles = riddles.filter((riddle) => riddle !== currentRiddle);
 
   currentRiddle = riddles[getRandomInteger(0, riddles.length - 1)];
+
+  // обновляем подсказки
+  feedHints(rowHints, collumnHints, currentRiddle);
 
   console.log(currentRiddle);
 
@@ -66,18 +58,13 @@ function createModal() {
 
   const resultMsg = document.createElement('p');
   resultMsg.classList.add('modal__msg');
-  resultMsg.append('YOU ARE ');
-  const result = document.createElement('span');
-  result.classList.add('modal__result');
-  result.append('WIN!!!');
-  resultMsg.append(result);
+  resultMsg.append('Great! You have solved the nonogram!');
   modal.append(resultMsg);
 
   const playAgainBtn = document.createElement('button');
   playAgainBtn.classList.add('modal__new-btn');
   playAgainBtn.type = 'button';
   playAgainBtn.append('Play again');
-  // playAgainBtn.setAttribute('onclick', `${closeModal.name}()`);
   playAgainBtn.addEventListener('click', closeModal);
   modal.append(playAgainBtn);
 
@@ -85,7 +72,6 @@ function createModal() {
 
   document.body.append(modalBack);
 }
-const fieldCLick = document.querySelector('.field');
 
 function mainLogic(cell) {
   cell.classList.toggle('field__item_clicked');

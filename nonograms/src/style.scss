@@ -1,11 +1,19 @@
 @import "variables";
 
+@font-face {
+  font-family: 'Gagalin';
+  src: local('Gagalin'), local('Gagalin-Regular'), url('./assets/Gagalin.woff2') format('woff2'), url('./assets/Gagalin.woff') format('woff'), url('./assets/Gagalin.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 h1, h2, h3, h4, h5, h6, ul, p {
 	padding: 0;
 	margin: 0;
 }
 body {
   background-color: $bodyColor;
+  font-family: "Gagalin", sans-serif;
 }
 button {
 	padding: 0;
@@ -21,25 +29,65 @@ button {
   justify-content: space-between;
   max-width: 1400px;
   padding: 0 20px;
-  margin: 250px auto 0;
+  margin: 300px auto 0;
   box-sizing: border-box;
   //flex-wrap: wrap;
 }
-
-.field {
+.title {
+  position: absolute;
+  top: -168px;
+  left: -333px;
+  font-size: 65px;
+}
+.field,
+.rowclue,
+.collumnclue {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);;
+  grid-template-columns: repeat(5, 1fr);
   gap: 5px;
+  position: absolute;
   background-color: black;
   margin: 0 auto;
+  font-size: 50px;
+  font-weight: 700;
+  text-align: center;
   &__item {
     width: 75px;
     height: 75px;
+    padding: 10px 0px;
+    box-sizing: border-box;
     background-color: chartreuse;
+  }
+}
+.field {
+  position: relative;
+  left: 122.5px;
+  &__item {
     &_clicked {
       background-color: black;
     }
   }
+}
+.rowclue {
+  grid-template-columns: repeat(3, 1fr);
+  left: -245px;
+}
+.collumnclue {
+  top: -245px;
+}
+.vdivider {
+  position: absolute;
+  width: 10px;
+  height: 395px;
+  background-color: black;
+  left: -10px;
+}
+.hdivider {
+  position: absolute;
+  width: 395px;
+  height: 10px;
+  background-color: black;
+  top: -10px;
 }
 
 .modal-back {
@@ -63,7 +111,7 @@ button {
   box-sizing: border-box;
   padding: 16px;
   text-align: center;
-  font-size: 50px;
+  font-size: 35px;
   &__msg {
     font-weight: 700;
     margin-bottom: 15px;
