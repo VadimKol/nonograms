@@ -36,6 +36,7 @@ currentRiddle = riddles[getRandomInteger(0, riddles.length - 1)];
 console.log(currentRiddle);
 
 function closeModal() {
+  // playAgainBtn.removeEventListener("click", closeModal);// не надо я так понял, если .remove() нода
   // закрываем модалку
   destroyModal();
 
@@ -55,8 +56,6 @@ function closeModal() {
 
   document.body.classList.toggle('overflow-body');
 }
-
-window.closeModal = closeModal;
 
 function createModal() {
   const modalBack = document.createElement('div');
@@ -78,14 +77,14 @@ function createModal() {
   playAgainBtn.classList.add('modal__new-btn');
   playAgainBtn.type = 'button';
   playAgainBtn.append('Play again');
-  playAgainBtn.setAttribute('onclick', `${closeModal.name}()`);
+  // playAgainBtn.setAttribute('onclick', `${closeModal.name}()`);
+  playAgainBtn.addEventListener('click', closeModal);
   modal.append(playAgainBtn);
 
   modalBack.append(modal);
 
   document.body.append(modalBack);
 }
-
 const fieldCLick = document.querySelector('.field');
 
 function mainLogic(cell) {
