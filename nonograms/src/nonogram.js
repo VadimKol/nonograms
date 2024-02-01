@@ -17,7 +17,8 @@ const collumnHints = document.querySelectorAll('.collumnclue__item');
       throw new Error(responsePromise.status);
     }
     currentRiddle = riddles[getRandomInteger(0, riddles.length - 1)];
-    console.log(currentRiddle);
+    console.log('Current Nonogram is: ');
+    currentRiddle.riddle.forEach((x) => console.log(...x));
 
     feedHints(rowHints, collumnHints, currentRiddle);
   } catch (err) {
@@ -44,7 +45,8 @@ function closeModal() {
   // обновляем подсказки
   feedHints(rowHints, collumnHints, currentRiddle);
 
-  console.log(currentRiddle);
+  console.log('Current Nonogram is: ');
+  currentRiddle.riddle.forEach((x) => console.log(...x));
 
   document.body.classList.toggle('overflow-body');
 }
