@@ -14,3 +14,121 @@
     }
   }
 }
+
+@media screen and (max-width: 950px) {
+  .title {
+    font-size: 50px;
+    top: -120px;
+    left: -253px;
+  }
+  .field,
+  .rowclue,
+  .columnclue {
+    font-size: 35px;
+    &__item {
+      width: 50px;
+      height: 50px;
+      padding: 3px 0px;
+    }
+  }
+  .field {
+    left: 85px;
+  }
+  .rowclue {
+    left: -170px;
+  }
+  .columnclue {
+    top: -170px;
+  }
+  .vdivider {
+    height: 270px;
+  }
+  .hdivider {
+    width: 270px;
+  }
+  .modal {
+    max-width: 600px;
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .title {
+    font-size: 35px;
+    top: -88px;
+    left: -181px;
+  }
+  .field,
+  .rowclue,
+  .columnclue {
+    font-size: 30px;
+    &__item {
+      width: 35px;
+      height: 35px;
+      padding: 0px;
+    }
+  }
+  .field {
+    left: 62.5px;
+  }
+  .rowclue {
+    left: -125px;
+  }
+  .columnclue {
+    top: -125px;
+  }
+  .vdivider {
+    height: 195px;
+  }
+  .hdivider {
+    width: 195px;
+  }
+  .modal {
+    max-width: 475px;
+    font-size: 25px;
+  }
+}
+@media screen and (max-width: 499px) {
+  .modal {
+    max-width: 385px;
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 469px) {
+  .title {
+    top: -225px;
+    left: -60px;
+  }
+}
+@media screen and (max-width: 420px) {
+  .modal {
+    max-width: 300px;
+  }
+}
+@media screen and (max-width: 359px) {
+  .field,
+  .rowclue,
+  .columnclue {
+    font-size: 25px;
+    &__item {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  .field {
+    left: 55px;
+  }
+  .rowclue {
+    left: -110px;
+  }
+  .columnclue {
+    top: -110px;
+  }
+  .vdivider {
+    height: 170px;
+  }
+  .hdivider {
+    width: 170px;
+  }
+}
+
