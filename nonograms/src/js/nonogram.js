@@ -22,6 +22,18 @@ const secondsDOM = document.querySelector('.timer__seconds');
 const rowHints = document.querySelectorAll('.rowclue__item');
 const columnHints = document.querySelectorAll('.columnclue__item');
 
+const blackSound = new Audio('black.wav');
+const crossSound = new Audio('cross.wav');
+const whiteSound = new Audio('white.wav');
+const winSound = new Audio('win.wav');
+
+// не могу сделать потише почемуто?!
+// понял, я же клонирую ноду(((
+/* blackSound.volume = 0.2;
+crossSound.volume = 0.2;
+whiteSound.volume = 0.2; */
+winSound.volume = 0.5;
+
 (async () => {
   try {
     const responsePromise = await fetch('riddles.json');
@@ -153,7 +165,15 @@ function createModal() {
 
   document.body.append(modalBack);
 }
-function mainLogic(cell) {
+function lClickLogic(cell) {
+  // клонировать ноду, может быть плохо для памяти, не пойму
+  if (
+    cell.classList.contains('field__item_r-clicked') ||
+    !cell.classList.contains('field__item_clicked')
+  )
+    blackSound.cloneNode(false).play();
+  else whiteSound.cloneNode(false).play();
+
   // стартуем таймер при лефт клике
   if (currentTimerId === 0) startTimer();
 
@@ -182,11 +202,25 @@ function mainLogic(cell) {
 
   // победил
   if (result) {
+    // winSound.play();
+    // два звука одновременно из-за логики поиска победы
+    // и определения, когда проигрывается звук
+    // приходится сделать небольшой делей
+    setTimeout(() => {
+      winSound.play();
+    }, 250);
     document.body.classList.toggle('overflow-body');
     createModal();
   }
 }
 function rClickLogic(cell) {
+  if (
+    cell.classList.contains('field__item_clicked') ||
+    !cell.classList.contains('field__item_r-clicked')
+  )
+    crossSound.cloneNode(false).play();
+  else whiteSound.cloneNode(false).play();
+
   // райт клике
   if (currentTimerId === 0) startTimer();
 
@@ -220,7 +254,7 @@ fieldCLick.onclick = (event) => {
   const cell = event.target;
   if (!cell.classList.contains('field__item')) return;
 
-  mainLogic(cell);
+  lClickLogic(cell);
 };
 
 fieldCLick.addEventListener('contextmenu', (event) => {
