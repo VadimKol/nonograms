@@ -123,9 +123,7 @@ function closeModal() {
 }
 
 function createModal() {
-  // останавливаем таймер
-  // нужно остановить таймер
-  // но вот очищать поле, незнаю надо или нет
+  // останавливаем таймер без очистки
   clearInterval(currentTimerId);
 
   const modalBack = document.createElement('div');
@@ -228,12 +226,11 @@ fieldCLick.onclick = (event) => {
 fieldCLick.addEventListener('contextmenu', (event) => {
   // я так понял, меню можно вызвать не только мышкой
   if (event.pointerType === 'mouse') {
-    // убираем поведение по умолчанию
-    event.preventDefault();
-
     const cell = event.target;
     if (!cell.classList.contains('field__item')) return;
 
+    // убираем поведение по умолчанию
+    event.preventDefault();
     rClickLogic(cell);
   }
 });
