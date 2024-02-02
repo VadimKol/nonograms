@@ -4,6 +4,13 @@ export function getRandomInteger(min, max) {
 export function destroyModal() {
   document.querySelector('.modal-back').remove();
 }
+export function resetField() {
+  // восстанавлием поле
+  while (document.querySelector('.field__item_clicked') !== null)
+    document
+      .querySelector('.field__item_clicked')
+      .classList.toggle('field__item_clicked');
+}
 export function feedHints(rowHints, columnHints, currentRiddle) {
   rowHints.forEach((x) => {
     x.innerText = '';
@@ -34,11 +41,6 @@ export function feedHints(rowHints, columnHints, currentRiddle) {
       rotatedcolumnHintsArr[k].append(currentRiddle.columnclue[i][j]);
   }
 }
-
-export function resetField() {
-  // восстанавлием поле
-  while (document.querySelector('.field__item_clicked') !== null)
-    document
-      .querySelector('.field__item_clicked')
-      .classList.toggle('field__item_clicked');
+export function openTemplatesList() {
+  document.querySelector('.templates').classList.toggle('templates_show');
 }

@@ -1,14 +1,17 @@
 import {
   getRandomInteger,
-  destroyModal,
   feedHints,
+  destroyModal,
   resetField,
+  openTemplatesList,
 } from './helper';
 
 const fieldCLick = document.querySelector('.field');
+const templatesClick = document.querySelector('.templates');
 
 let riddles;
 let currentRiddle;
+let currentRiddleId;
 const rowHints = document.querySelectorAll('.rowclue__item');
 const columnHints = document.querySelectorAll('.columnclue__item');
 
@@ -16,16 +19,26 @@ const columnHints = document.querySelectorAll('.columnclue__item');
   try {
     const responsePromise = await fetch('riddles.json');
 
-    if (responsePromise.ok) {
-      riddles = await responsePromise.json();
-    } else {
-      throw new Error(responsePromise.status);
-    }
-    currentRiddle = riddles[getRandomInteger(0, riddles.length - 1)];
+    if (responsePromise.ok) riddles = await responsePromise.json();
+    else throw new Error(responsePromise.status);
+
+    currentRiddleId = getRandomInteger(0, riddles.length - 1);
+    currentRiddle = riddles[currentRiddleId];
+
     console.log('Current Nonogram is: ');
     currentRiddle.riddle.forEach((x) => console.log(...x));
 
     feedHints(rowHints, columnHints, currentRiddle);
+
+    // так, видимо тут будет генерится список с темплейтами
+    const templates = document.querySelector('.templates');
+    for (let i = 0; i < riddles.length; i += 1) {
+      const templatesItem = document.createElement('li');
+      templatesItem.classList.add('templates__item');
+      templatesItem.classList.add(`templates__item-${i + 1}`);
+      templatesItem.append(riddles[i].name);
+      templates.append(templatesItem);
+    }
   } catch (err) {
     console.log(err);
   }
@@ -40,9 +53,14 @@ function closeModal() {
   resetField();
 
   // берем новую загадку
-  riddles = riddles.filter((riddle) => riddle !== currentRiddle);
+  let newRiddleId = currentRiddleId;
 
-  currentRiddle = riddles[getRandomInteger(0, riddles.length - 1)];
+  while (currentRiddleId === newRiddleId)
+    newRiddleId = getRandomInteger(0, riddles.length - 1);
+
+  currentRiddleId = newRiddleId;
+
+  currentRiddle = riddles[currentRiddleId];
 
   // обновляем подсказки
   feedHints(rowHints, columnHints, currentRiddle);
@@ -98,10 +116,29 @@ function mainLogic(cell) {
 
     if (i === cellsArr.length - 1) result = true;
   }
+
   if (result) {
     document.body.classList.toggle('overflow-body');
     createModal();
   }
+}
+function openNewField(event) {
+  const listItem = event.target;
+  if (listItem.tagName !== 'LI') return;
+
+  resetField();
+
+  // берем загадку из списка
+  currentRiddleId = listItem.classList[1].replace('templates__item-', '') - 1;
+  currentRiddle = riddles[currentRiddleId];
+
+  feedHints(rowHints, columnHints, currentRiddle);
+
+  console.log('Current Nonogram is: ');
+  currentRiddle.riddle.forEach((x) => console.log(...x));
+
+  // закрываем список
+  openTemplatesList();
 }
 
 fieldCLick.onclick = (event) => {
@@ -110,3 +147,9 @@ fieldCLick.onclick = (event) => {
 
   mainLogic(cell);
 };
+
+// хотел сделать обертку через ()=>{}, чтобы передать параметры в хэндлер
+// и определять его в helpers, но проблема с аргументами
+// не меняются значения аргументов
+// даже объект не поменялся, вобщем небольшая проблема
+templatesClick.addEventListener('click', openNewField);

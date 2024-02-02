@@ -13,6 +13,12 @@
         cursor: pointer;
     }
   }
+  .templates__item {
+    &:hover {
+      cursor: pointer;
+      color: lighten($black, 50%);
+    }
+  }
 }
 
 @media screen and (max-width: 950px) {
@@ -48,6 +54,9 @@
   }
   .reset-btn {
     left: -138.795px;
+  }
+  .reset-btn,
+  .templates-btn {
     bottom: -88px;
   }
   .btn,
@@ -56,6 +65,11 @@
   }
   .modal {
     max-width: 600px;
+  }
+  .templates {
+    right: 181px;
+    gap: 10px;
+    bottom: -200px;
   }
 }
 
@@ -96,11 +110,19 @@
   }
   .reset-btn {
     left: -103.365px;
-    bottom: -73px;
+  }
+  .reset-btn,
+  .templates-btn {
     font-size: 20px;
+    bottom: -73px;
   }
   .modal {
     max-width: 475px;
+  }
+  .templates {
+    right: 128px;
+    font-size: 20px;
+    bottom: -171px;
   }
 }
 @media screen and (max-width: 499px) {
@@ -150,7 +172,14 @@
   }
   .reset-btn {
     left: -95.865px;
+  }
+  .reset-btn,
+  .templates-btn {
     bottom: -69px;
+  }
+  .templates {
+    bottom: -237px;
+    right: 17px;
   }
 }
 

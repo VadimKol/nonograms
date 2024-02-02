@@ -6,24 +6,27 @@ h1, h2, h3, h4, h5, h6, ul, p {
 	margin: 0;
 }
 body {
-  background-color: $bodyColor;
+  background-color: $body-color;
   font-family: "Gagalin", sans-serif;
 }
 button {
 	padding: 0;
-	border:none;
+	border: none;
 	line-height: 1;
 	background-color: transparent;
 	&:focus {
 		outline: none;
 	}
 }
+ul {
+  list-style-type: none;
+}
 .btn {
   font-size: 35px;
   padding: 15px;
   border-radius: 50px;
   background-color: $btn-back;
-  color: white;
+  color: $white;
 }
 .wrapper {
   display: flex;
@@ -47,7 +50,7 @@ button {
   grid-template-columns: repeat(5, 1fr);
   gap: 5px;
   position: absolute;
-  background-color: black;
+  background-color: $black;
   margin: 0 auto;
   font-size: 50px;
   font-weight: 700;
@@ -57,7 +60,7 @@ button {
     height: 75px;
     padding: 10px 0px;
     box-sizing: border-box;
-    background-color: chartreuse;
+    background-color: $cell-clr;
   }
 }
 .field {
@@ -65,7 +68,7 @@ button {
   left: 122.5px;
   &__item {
     &_clicked {
-      background-color: black;
+      background-color: $black;
     }
   }
 }
@@ -80,14 +83,14 @@ button {
   position: absolute;
   width: 10px;
   height: 395px;
-  background-color: black;
+  background-color: $black;
   left: -10px;
 }
 .hdivider {
   position: absolute;
   width: 395px;
   height: 10px;
-  background-color: black;
+  background-color: $black;
   top: -10px;
 }
 .reset-btn {
@@ -104,7 +107,7 @@ button {
   background-color: rgba(61, 61, 61, 0.70);
 }
 .modal {
-  background-color: white;
+  background-color: $white;
   border-radius: 40px;
   margin: auto;
   max-width: 800px;
@@ -123,8 +126,33 @@ button {
     margin-bottom: 15px;
   }
 }
+.templates {
+  display: none;
+  position: absolute;
+  bottom: -220px;
+  right: 205px;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 25px;
+  background: $back-templates;
+  box-sizing: border-box;
+  padding: 4px 10px;
+  border-radius: 20px;
+  //&__item {
+    //margin-bottom: 5px;
+  //}
+  &-btn {
+    position: absolute;
+    bottom: -107px;
+    right: 0;
+  }
+}
+
 
 // js
 .overflow-body {
   overflow: hidden;
+}
+.templates_show {
+  display: flex;
 }

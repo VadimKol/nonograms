@@ -1,4 +1,4 @@
-import { resetField } from './helper';
+import { resetField, openTemplatesList } from './helper';
 
 const wrapper = document.createElement('div');
 wrapper.classList.add('wrapper');
@@ -49,12 +49,27 @@ resetBtn.type = 'button';
 resetBtn.append('Reset');
 resetBtn.addEventListener('click', resetField);
 
+const templatesBtn = document.createElement('button');
+templatesBtn.classList.add('templates-btn');
+templatesBtn.classList.add('btn');
+templatesBtn.type = 'button';
+templatesBtn.append('Templates');
+templatesBtn.addEventListener('click', openTemplatesList);
+
+const templatesList = document.createElement('ul');
+templatesList.classList.add('templates');
+
 field.append(rowclue);
 field.append(columnclue);
 
 field.append(verticalDivider);
 field.append(horisontalDivider);
+
 field.append(headerText);
+
 field.append(resetBtn);
+
+field.append(templatesBtn);
+field.append(templatesList);
 
 wrapper.append(field);
