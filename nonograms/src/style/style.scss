@@ -70,6 +70,10 @@ ul {
     &_clicked {
       background-color: $black;
     }
+    &_r-clicked {
+      background-image: url(../assets/img/cross.svg);
+      background-size: cover;
+    }
   }
 }
 .rowclue {

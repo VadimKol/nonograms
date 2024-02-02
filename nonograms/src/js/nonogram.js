@@ -97,6 +97,9 @@ function createModal() {
 }
 
 function mainLogic(cell) {
+  if (cell.classList.contains('field__item_r-clicked'))
+    cell.classList.toggle('field__item_r-clicked');
+
   cell.classList.toggle('field__item_clicked');
 
   const cellsArr = document.querySelectorAll('.field__item');
@@ -122,6 +125,13 @@ function mainLogic(cell) {
     createModal();
   }
 }
+function rClickLogic(cell) {
+  if (cell.classList.contains('field__item_clicked'))
+    cell.classList.toggle('field__item_clicked');
+
+  cell.classList.toggle('field__item_r-clicked');
+}
+
 function openNewField(event) {
   const listItem = event.target;
   if (listItem.tagName !== 'LI') return;
@@ -147,6 +157,19 @@ fieldCLick.onclick = (event) => {
 
   mainLogic(cell);
 };
+
+fieldCLick.addEventListener('contextmenu', (event) => {
+  // я так понял, меню можно вызвать не только мышкой
+  if (event.pointerType === 'mouse') {
+    // убираем поведение по умолчанию
+    event.preventDefault();
+
+    const cell = event.target;
+    if (!cell.classList.contains('field__item')) return;
+
+    rClickLogic(cell);
+  }
+});
 
 // хотел сделать обертку через ()=>{}, чтобы передать параметры в хэндлер
 // и определять его в helpers, но проблема с аргументами

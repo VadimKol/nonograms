@@ -10,6 +10,10 @@ export function resetField() {
     document
       .querySelector('.field__item_clicked')
       .classList.toggle('field__item_clicked');
+  while (document.querySelector('.field__item_r-clicked') !== null)
+    document
+      .querySelector('.field__item_r-clicked')
+      .classList.toggle('field__item_r-clicked');
 }
 export function feedHints(rowHints, columnHints, currentRiddle) {
   rowHints.forEach((x) => {
