@@ -1,4 +1,9 @@
-import { getRandomInteger, destroyModal, feedHints } from './helper';
+import {
+  getRandomInteger,
+  destroyModal,
+  feedHints,
+  resetField,
+} from './helper';
 
 const fieldCLick = document.querySelector('.field');
 
@@ -32,10 +37,7 @@ function closeModal() {
   destroyModal();
 
   // восстанавлием поле
-  while (document.querySelector('.field__item_clicked') !== null)
-    document
-      .querySelector('.field__item_clicked')
-      .classList.toggle('field__item_clicked');
+  resetField();
 
   // берем новую загадку
   riddles = riddles.filter((riddle) => riddle !== currentRiddle);
@@ -65,6 +67,7 @@ function createModal() {
 
   const playAgainBtn = document.createElement('button');
   playAgainBtn.classList.add('modal__new-btn');
+  playAgainBtn.classList.add('btn');
   playAgainBtn.type = 'button';
   playAgainBtn.append('Play again');
   playAgainBtn.addEventListener('click', closeModal);

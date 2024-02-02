@@ -34,3 +34,11 @@ export function feedHints(rowHints, columnHints, currentRiddle) {
       rotatedcolumnHintsArr[k].append(currentRiddle.columnclue[i][j]);
   }
 }
+
+export function resetField() {
+  // восстанавлием поле
+  while (document.querySelector('.field__item_clicked') !== null)
+    document
+      .querySelector('.field__item_clicked')
+      .classList.toggle('field__item_clicked');
+}

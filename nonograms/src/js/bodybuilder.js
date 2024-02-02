@@ -1,3 +1,5 @@
+import { resetField } from './helper';
+
 const wrapper = document.createElement('div');
 wrapper.classList.add('wrapper');
 
@@ -40,11 +42,19 @@ verticalDivider.classList.add('vdivider');
 const horisontalDivider = document.createElement('div');
 horisontalDivider.classList.add('hdivider');
 
+const resetBtn = document.createElement('button');
+resetBtn.classList.add('reset-btn');
+resetBtn.classList.add('btn');
+resetBtn.type = 'button';
+resetBtn.append('Reset');
+resetBtn.addEventListener('click', resetField);
+
 field.append(rowclue);
 field.append(columnclue);
 
 field.append(verticalDivider);
 field.append(horisontalDivider);
 field.append(headerText);
+field.append(resetBtn);
 
 wrapper.append(field);

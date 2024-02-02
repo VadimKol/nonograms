@@ -18,6 +18,13 @@ button {
 		outline: none;
 	}
 }
+.btn {
+  font-size: 35px;
+  padding: 15px;
+  border-radius: 50px;
+  background-color: $btn-back;
+  color: white;
+}
 .wrapper {
   display: flex;
   justify-content: space-between;
@@ -83,6 +90,11 @@ button {
   background-color: black;
   top: -10px;
 }
+.reset-btn {
+  position: absolute;
+  left: -182.76px;
+  bottom: -107px;
+}
 
 .modal-back {
   position: fixed;
@@ -105,16 +117,10 @@ button {
   box-sizing: border-box;
   padding: 16px;
   text-align: center;
-  font-size: 35px;
   &__msg {
+    font-size: 35px;
     font-weight: 700;
     margin-bottom: 15px;
-  }
-  &__new-btn {
-    padding: 15px;
-    border-radius: 50px;
-    background-color: $btn-back;
-    color: white;
   }
 }
 

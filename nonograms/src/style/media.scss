@@ -46,9 +46,16 @@
   .hdivider {
     width: 270px;
   }
+  .reset-btn {
+    left: -138.795px;
+    bottom: -88px;
+  }
+  .btn,
+  .modal__msg {
+    font-size: 30px;
+  }
   .modal {
     max-width: 600px;
-    font-size: 30px;
   }
 }
 
@@ -83,15 +90,26 @@
   .hdivider {
     width: 195px;
   }
+  .btn,
+  .modal__msg {
+    font-size: 25px;
+  }
+  .reset-btn {
+    left: -103.365px;
+    bottom: -73px;
+    font-size: 20px;
+  }
   .modal {
     max-width: 475px;
-    font-size: 25px;
   }
 }
 @media screen and (max-width: 499px) {
+  .btn,
+  .modal__msg {
+    font-size: 20px;
+  }
   .modal {
     max-width: 385px;
-    font-size: 20px;
   }
 }
 @media screen and (max-width: 469px) {
@@ -129,6 +147,10 @@
   }
   .hdivider {
     width: 170px;
+  }
+  .reset-btn {
+    left: -95.865px;
+    bottom: -69px;
   }
 }
 
