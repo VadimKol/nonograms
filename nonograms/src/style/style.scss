@@ -151,7 +151,11 @@ ul {
     right: 0;
   }
 }
-
+.timer {
+  position: absolute;
+  left: -115px;
+  top: -60px;
+}
 
 // js
 .overflow-body {

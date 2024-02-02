@@ -64,12 +64,16 @@
     font-size: 30px;
   }
   .modal {
-    max-width: 600px;
+    max-width: 680px;
   }
   .templates {
     right: 181px;
     gap: 10px;
     bottom: -200px;
+  }
+  .timer {
+    left: -80px;
+    top: -40px;
   }
 }
 
@@ -127,6 +131,10 @@
     font-size: 20px;
     bottom: -171px;
   }
+  .timer {
+    left: -66px;
+    top: -33px;
+  }
 }
 @media screen and (max-width: 499px) {
   .btn,
@@ -183,6 +191,10 @@
   .templates {
     bottom: -237px;
     right: 17px;
+  }
+  .timer {
+    left: -55px;
+    top: -27px;
   }
 }
 

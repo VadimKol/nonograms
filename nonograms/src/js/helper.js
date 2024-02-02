@@ -4,17 +4,6 @@ export function getRandomInteger(min, max) {
 export function destroyModal() {
   document.querySelector('.modal-back').remove();
 }
-export function resetField() {
-  // восстанавлием поле
-  while (document.querySelector('.field__item_clicked') !== null)
-    document
-      .querySelector('.field__item_clicked')
-      .classList.toggle('field__item_clicked');
-  while (document.querySelector('.field__item_r-clicked') !== null)
-    document
-      .querySelector('.field__item_r-clicked')
-      .classList.toggle('field__item_r-clicked');
-}
 export function feedHints(rowHints, columnHints, currentRiddle) {
   rowHints.forEach((x) => {
     x.innerText = '';

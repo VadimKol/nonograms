@@ -2,16 +2,23 @@ import {
   getRandomInteger,
   feedHints,
   destroyModal,
-  resetField,
   openTemplatesList,
 } from './helper';
 
 const fieldCLick = document.querySelector('.field');
 const templatesClick = document.querySelector('.templates');
+const resetBtn = document.querySelector('.reset-btn');
 
 let riddles;
 let currentRiddle;
 let currentRiddleId;
+
+let minutes = 0;
+let seconds = 0;
+let currentTimerId = 0;
+const minutesDOM = document.querySelector('.timer__minutes');
+const secondsDOM = document.querySelector('.timer__seconds');
+
 const rowHints = document.querySelectorAll('.rowclue__item');
 const columnHints = document.querySelectorAll('.columnclue__item');
 
@@ -44,6 +51,50 @@ const columnHints = document.querySelectorAll('.columnclue__item');
   }
 })();
 
+// интервал 1 секунда
+function startTimer() {
+  currentTimerId = setInterval(() => {
+    if (seconds === 59) {
+      minutes += 1;
+      seconds = 0;
+    } else {
+      seconds += 1;
+    }
+    if (seconds < 10) secondsDOM.innerText = '0'.concat(String(seconds));
+    else secondsDOM.innerText = String(seconds);
+
+    if (minutes < 10) minutesDOM.innerText = '0'.concat(String(minutes));
+    else minutesDOM.innerText = String(minutes);
+  }, 1000);
+}
+
+function clearTimer() {
+  // останавливаем таймер
+  clearInterval(currentTimerId);
+
+  // очищаем текущий таймер
+  currentTimerId = 0;
+  minutes = 0;
+  seconds = 0;
+  minutesDOM.innerText = '00';
+  secondsDOM.innerText = '00';
+}
+
+function resetField() {
+  // восстанавлием поле
+  while (document.querySelector('.field__item_clicked') !== null)
+    document
+      .querySelector('.field__item_clicked')
+      .classList.toggle('field__item_clicked');
+  while (document.querySelector('.field__item_r-clicked') !== null)
+    document
+      .querySelector('.field__item_r-clicked')
+      .classList.toggle('field__item_r-clicked');
+
+  // останавливаем и очищаем таймер
+  clearTimer();
+}
+
 function closeModal() {
   // playAgainBtn.removeEventListener("click", closeModal);// не надо я так понял, если .remove() нода
   // закрываем модалку
@@ -72,6 +123,11 @@ function closeModal() {
 }
 
 function createModal() {
+  // останавливаем таймер
+  // нужно остановить таймер
+  // но вот очищать поле, незнаю надо или нет
+  clearInterval(currentTimerId);
+
   const modalBack = document.createElement('div');
   modalBack.classList.add('modal-back');
 
@@ -80,7 +136,11 @@ function createModal() {
 
   const resultMsg = document.createElement('p');
   resultMsg.classList.add('modal__msg');
-  resultMsg.append('Great! You have solved the nonogram!');
+  resultMsg.append('Great! You have solved the nonogram in ');
+  resultMsg.append(minutesDOM.innerText);
+  resultMsg.append(':');
+  resultMsg.append(secondsDOM.innerText);
+  resultMsg.append(' !');
   modal.append(resultMsg);
 
   const playAgainBtn = document.createElement('button');
@@ -95,8 +155,10 @@ function createModal() {
 
   document.body.append(modalBack);
 }
-
 function mainLogic(cell) {
+  // стартуем таймер при лефт клике
+  if (currentTimerId === 0) startTimer();
+
   if (cell.classList.contains('field__item_r-clicked'))
     cell.classList.toggle('field__item_r-clicked');
 
@@ -120,12 +182,16 @@ function mainLogic(cell) {
     if (i === cellsArr.length - 1) result = true;
   }
 
+  // победил
   if (result) {
     document.body.classList.toggle('overflow-body');
     createModal();
   }
 }
 function rClickLogic(cell) {
+  // райт клике
+  if (currentTimerId === 0) startTimer();
+
   if (cell.classList.contains('field__item_clicked'))
     cell.classList.toggle('field__item_clicked');
 
@@ -150,6 +216,7 @@ function openNewField(event) {
   // закрываем список
   openTemplatesList();
 }
+resetBtn.addEventListener('click', resetField);
 
 fieldCLick.onclick = (event) => {
   const cell = event.target;

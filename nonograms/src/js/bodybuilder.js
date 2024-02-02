@@ -1,4 +1,4 @@
-import { resetField, openTemplatesList } from './helper';
+import { openTemplatesList } from './helper';
 
 const wrapper = document.createElement('div');
 wrapper.classList.add('wrapper');
@@ -47,7 +47,6 @@ resetBtn.classList.add('reset-btn');
 resetBtn.classList.add('btn');
 resetBtn.type = 'button';
 resetBtn.append('Reset');
-resetBtn.addEventListener('click', resetField);
 
 const templatesBtn = document.createElement('button');
 templatesBtn.classList.add('templates-btn');
@@ -58,6 +57,18 @@ templatesBtn.addEventListener('click', openTemplatesList);
 
 const templatesList = document.createElement('ul');
 templatesList.classList.add('templates');
+
+const timer = document.createElement('p');
+timer.classList.add('timer');
+const minutes = document.createElement('span');
+minutes.classList.add('timer__minutes');
+minutes.append('00');
+const seconds = document.createElement('span');
+seconds.classList.add('timer__seconds');
+seconds.append('00');
+timer.append(minutes);
+timer.append(':');
+timer.append(seconds);
 
 field.append(rowclue);
 field.append(columnclue);
@@ -71,5 +82,7 @@ field.append(resetBtn);
 
 field.append(templatesBtn);
 field.append(templatesList);
+
+field.append(timer);
 
 wrapper.append(field);
