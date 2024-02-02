@@ -74,6 +74,9 @@
 }
 
 @media screen and (max-width: 699px) {
+  .wrapper {
+    margin: 200px auto 0;
+  }
   .title {
     font-size: 35px;
     top: -88px;
@@ -136,7 +139,7 @@
 }
 @media screen and (max-width: 469px) {
   .title {
-    top: -225px;
+    top: -182px;
     left: -60px;
   }
 }
