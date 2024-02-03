@@ -37,3 +37,6 @@ export function feedHints(rowHints, columnHints, currentRiddle) {
 export function openTemplatesList() {
   document.querySelector('.templates').classList.toggle('templates_show');
 }
+export function switchTheme() {
+  document.body.classList.toggle('body-dark-theme');
+}

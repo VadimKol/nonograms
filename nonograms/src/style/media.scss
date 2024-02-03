@@ -1,12 +1,15 @@
-@use 'sass:color';
-@import "variables";
-
 @media (hover: hover) {
   button {
       &:hover {
           cursor: pointer;
-          background-color: lighten($btn-back, 15%);
+            background-color: var(--btn-back-hover);
       }
+  }
+  .theme-btn {
+    &:hover {
+      background-color: transparent;
+      transform: rotate(67.5deg);
+    }
   }
   .field__item {
     &:hover {
@@ -16,7 +19,7 @@
   .templates__item {
     &:hover {
       cursor: pointer;
-      color: lighten($black, 50%);
+        color: var(--gray);
     }
   }
 }
@@ -85,6 +88,10 @@
   .load-btn {
     left: -131px;
   }
+  .theme-btn {
+    top: -160px;
+    left: 280px;
+  }
 }
 
 @media screen and (max-width: 699px) {
@@ -138,8 +145,8 @@
   }
   .templates {
     right: 128px;
-    font-size: 20px;
-    bottom: -171px;
+    bottom: -154px;
+    font-size: 17px;
   }
   .timer {
     left: -66px;
@@ -156,6 +163,12 @@
   .load-btn {
     left: -98px;
   }
+  .theme-btn {
+    top: -119px;
+    left: 202px;
+    width: 25px;
+    height: 25px;
+  }
 }
 @media screen and (max-width: 499px) {
   .btn,
@@ -164,6 +177,10 @@
   }
   .modal {
     max-width: 385px;
+  }
+  .theme-btn {
+    top: -155px;
+    left: 165px;
   }
 }
 @media screen and (max-width: 469px) {
@@ -210,7 +227,7 @@
     bottom: -69px;
   }
   .templates {
-    bottom: -237px;
+    bottom: -223px;
     right: 17px;
   }
   .timer {
@@ -226,6 +243,10 @@
   }
   .load-btn {
     left: -90px;
+  }
+  .theme-btn {
+    top: -140px;
+    left: 142px;
   }
 }
 

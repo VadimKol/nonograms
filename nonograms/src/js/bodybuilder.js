@@ -1,4 +1,4 @@
-import { openTemplatesList } from './helper';
+import { openTemplatesList, switchTheme } from './helper';
 
 const wrapper = document.createElement('div');
 wrapper.classList.add('wrapper');
@@ -82,6 +82,11 @@ loadBtn.classList.add('btn');
 loadBtn.type = 'button';
 loadBtn.append('Load');
 
+const themeBtn = document.createElement('button');
+themeBtn.classList.add('theme-btn');
+themeBtn.type = 'button';
+themeBtn.addEventListener('click', switchTheme);
+
 field.append(rowclue);
 field.append(columnclue);
 
@@ -99,5 +104,7 @@ field.append(timer);
 
 field.append(saveBtn);
 field.append(loadBtn);
+
+field.append(themeBtn);
 
 wrapper.append(field);

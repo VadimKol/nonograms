@@ -1,12 +1,37 @@
-@import "variables";
 @import "font";
+
+:root {
+  --body-color: #c6a664;
+  --btn-back: #695d30;
+  --btn-back-hover: #9e8c48;
+  --back-templates: #f5deb3;
+  --white: #ffffff;
+  --black: #000000;
+  --gray: #808080;
+  --cell-clr: #7fff00;
+  --cross: url(../assets/img/cross.svg);
+  --sun: url(../assets/img/sun_dark.svg);
+}
+
+.body-dark-theme {
+  --body-color: #574520;
+  --btn-back: #dfd7b9;
+  --btn-back-hover: #c7b985;
+  --back-templates: #c2881a;
+  --white: #000000;
+  --black: #ffffff;
+  --gray: #808080;
+  --cell-clr: #264d00;
+  --cross: url(../assets/img/cross_light.svg);
+  --sun: url(../assets/img/sun.svg);
+}
 
 h1, h2, h3, h4, h5, h6, ul, p {
 	padding: 0;
 	margin: 0;
 }
 body {
-  background-color: $body-color;
+  background-color: var(--body-color);
   font-family: "Gagalin", sans-serif;
 }
 button {
@@ -25,8 +50,9 @@ ul {
   font-size: 35px;
   padding: 15px;
   border-radius: 50px;
-  background-color: $btn-back;
-  color: $white;
+  background-color: var(--btn-back);
+  color: var(--white);
+  transition: background-color 0.2s;
 }
 .wrapper {
   display: flex;
@@ -35,7 +61,6 @@ ul {
   padding: 0 20px;
   margin: 300px auto 0;
   box-sizing: border-box;
-  //flex-wrap: wrap;
 }
 .title {
   position: absolute;
@@ -50,7 +75,8 @@ ul {
   grid-template-columns: repeat(5, 1fr);
   gap: 5px;
   position: absolute;
-  background-color: $black;
+  background-color: var(--black);
+  color: var(--black);
   margin: 0 auto;
   font-size: 50px;
   font-weight: 700;
@@ -60,7 +86,7 @@ ul {
     height: 75px;
     padding: 10px 0px;
     box-sizing: border-box;
-    background-color: $cell-clr;
+    background-color: var(--cell-clr);
   }
 }
 .field {
@@ -68,10 +94,10 @@ ul {
   left: 122.5px;
   &__item {
     &_clicked {
-      background-color: $black;
+      background-color: var(--black);
     }
     &_r-clicked {
-      background-image: url(../assets/img/cross.svg);
+      background-image: var(--cross);
       background-size: cover;
     }
   }
@@ -87,14 +113,14 @@ ul {
   position: absolute;
   width: 10px;
   height: 395px;
-  background-color: $black;
+  background-color: var(--black);
   left: -10px;
 }
 .hdivider {
   position: absolute;
   width: 395px;
   height: 10px;
-  background-color: $black;
+  background-color: var(--black);
   top: -10px;
 }
 .reset-btn {
@@ -111,7 +137,7 @@ ul {
   background-color: rgba(61, 61, 61, 0.70);
 }
 .modal {
-  background-color: $white;
+  background-color: var(--white);
   border-radius: 40px;
   margin: auto;
   max-width: 800px;
@@ -125,6 +151,7 @@ ul {
   padding: 16px;
   text-align: center;
   &__msg {
+    color: var(--black);
     font-size: 35px;
     font-weight: 700;
     margin-bottom: 15px;
@@ -138,13 +165,14 @@ ul {
   flex-direction: column;
   gap: 15px;
   font-size: 25px;
-  background: $back-templates;
+  letter-spacing: 1.5px;
+  background: var(--back-templates);
   box-sizing: border-box;
   padding: 4px 10px;
   border-radius: 20px;
-  //&__item {
-    //margin-bottom: 5px;
-  //}
+  &__item {
+    transition: color 0.2s;
+  }
   &-btn {
     position: absolute;
     bottom: -107px;
@@ -166,6 +194,16 @@ ul {
   position: absolute;
   bottom: -190px;
   left: -177px;
+}
+.theme-btn {
+  position: absolute;
+  top: -230px;
+  left: 410px;
+  width: 30px;
+  height: 30px;
+  background-image: var(--sun);
+  background-size: cover;
+  transition: transform 0.2s;
 }
 
 // js
