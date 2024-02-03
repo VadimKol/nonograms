@@ -75,6 +75,16 @@
     left: -80px;
     top: -40px;
   }
+  .save-btn,
+  .load-btn {
+    bottom: -164px;
+  }
+  .save-btn {
+    right: 30px;
+  }
+  .load-btn {
+    left: -131px;
+  }
 }
 
 @media screen and (max-width: 699px) {
@@ -134,6 +144,17 @@
   .timer {
     left: -66px;
     top: -33px;
+  }
+  .save-btn,
+  .load-btn {
+    bottom: -131px;
+    font-size: 20px;
+  }
+  .save-btn {
+    right: 23px;
+  }
+  .load-btn {
+    left: -98px;
   }
 }
 @media screen and (max-width: 499px) {
@@ -195,6 +216,16 @@
   .timer {
     left: -55px;
     top: -27px;
+  }
+  .save-btn,
+  .load-btn {
+    bottom: -127px;
+  }
+  .save-btn {
+    right: 110px;
+  }
+  .load-btn {
+    left: -90px;
   }
 }
 

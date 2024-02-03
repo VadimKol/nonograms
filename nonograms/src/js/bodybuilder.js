@@ -70,6 +70,18 @@ timer.append(minutes);
 timer.append(':');
 timer.append(seconds);
 
+const saveBtn = document.createElement('button');
+saveBtn.classList.add('save-btn');
+saveBtn.classList.add('btn');
+saveBtn.type = 'button';
+saveBtn.append('Save');
+
+const loadBtn = document.createElement('button');
+loadBtn.classList.add('load-btn');
+loadBtn.classList.add('btn');
+loadBtn.type = 'button';
+loadBtn.append('Load');
+
 field.append(rowclue);
 field.append(columnclue);
 
@@ -84,5 +96,8 @@ field.append(templatesBtn);
 field.append(templatesList);
 
 field.append(timer);
+
+field.append(saveBtn);
+field.append(loadBtn);
 
 wrapper.append(field);

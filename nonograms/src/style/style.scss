@@ -156,6 +156,17 @@ ul {
   left: -115px;
   top: -60px;
 }
+.save-btn {
+  position: absolute;
+  bottom: -190px;
+  right: 40px;
+}
+.load-btn {
+  display: none;
+  position: absolute;
+  bottom: -190px;
+  left: -177px;
+}
 
 // js
 .overflow-body {
@@ -163,4 +174,7 @@ ul {
 }
 .templates_show {
   display: flex;
+}
+.load-btn_show {
+  display: block;
 }

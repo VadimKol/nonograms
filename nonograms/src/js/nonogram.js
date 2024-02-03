@@ -8,6 +8,8 @@ import {
 const fieldCLick = document.querySelector('.field');
 const templatesClick = document.querySelector('.templates');
 const resetBtn = document.querySelector('.reset-btn');
+const saveBtn = document.querySelector('.save-btn');
+const loadBtn = document.querySelector('.load-btn');
 
 let riddles;
 let currentRiddle;
@@ -26,6 +28,8 @@ const blackSound = new Audio('black.wav');
 const crossSound = new Audio('cross.wav');
 const whiteSound = new Audio('white.wav');
 const winSound = new Audio('win.wav');
+
+let saveState = {};
 
 // не могу сделать потише почемуто?!
 // понял, я же клонирую ноду(((
@@ -248,6 +252,50 @@ function openNewField(event) {
   // закрываем список
   openTemplatesList();
 }
+
+function save() {
+  saveState.timer = minutesDOM.innerText.concat(':', secondsDOM.innerText);
+  saveState.currentRiddle = currentRiddle;
+  saveState.currentRiddleId = currentRiddleId;
+  saveState.field = Array.from({ length: 25 }, () => 0);
+  const fieldItems = document.querySelectorAll('.field__item');
+  for (let i = 0; i < saveState.field.length; i += 1) {
+    if (fieldItems[i].classList.contains('field__item_clicked'))
+      saveState.field[i] = 1;
+    else if (fieldItems[i].classList.contains('field__item_r-clicked'))
+      saveState.field[i] = 2;
+  }
+  localStorage.setItem('nonogramVK', JSON.stringify(saveState));
+  if (!loadBtn.classList.contains('load-btn_show'))
+    loadBtn.classList.toggle('load-btn_show');
+}
+function load() {
+  resetField();
+  saveState = JSON.parse(localStorage.getItem('nonogramVK'));
+  currentRiddle = saveState.currentRiddle;
+  currentRiddleId = saveState.currentRiddleId;
+  const fieldItems = document.querySelectorAll('.field__item');
+  for (let i = 0; i < saveState.field.length; i += 1) {
+    if (saveState.field[i] === 1)
+      fieldItems[i].classList.toggle('field__item_clicked');
+    else if (saveState.field[i] === 2)
+      fieldItems[i].classList.toggle('field__item_r-clicked');
+  }
+  feedHints(rowHints, columnHints, currentRiddle);
+  [minutesDOM.innerText, secondsDOM.innerText] = saveState.timer.split(':');
+  minutes = Number(minutesDOM.innerText);
+  seconds = Number(secondsDOM.innerText);
+
+  console.log('Current Nonogram is: ');
+  currentRiddle.riddle.forEach((x) => console.log(...x));
+
+  // нужно ли очищать локалсторидж?! - сказали нет
+  // для разовой загрузки
+}
+// когда уходят со страницы, нужно показать кнопку потом при возврате
+if (localStorage.getItem('nonogramVK') !== null)
+  loadBtn.classList.toggle('load-btn_show');
+
 resetBtn.addEventListener('click', resetField);
 
 fieldCLick.onclick = (event) => {
@@ -274,3 +322,6 @@ fieldCLick.addEventListener('contextmenu', (event) => {
 // не меняются значения аргументов
 // даже объект не поменялся, вобщем небольшая проблема
 templatesClick.addEventListener('click', openNewField);
+
+saveBtn.addEventListener('click', save);
+loadBtn.addEventListener('click', load);
