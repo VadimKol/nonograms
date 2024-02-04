@@ -87,6 +87,21 @@ themeBtn.classList.add('theme-btn');
 themeBtn.type = 'button';
 themeBtn.addEventListener('click', switchTheme);
 
+const table = document.createElement('div');
+table.classList.add('score');
+const scoreTitle = document.createElement('p');
+scoreTitle.classList.add('score__title');
+scoreTitle.append('Latest 5 wins:');
+const scoreList = document.createElement('ol');
+scoreList.classList.add('score__list');
+for (let i = 0; i < 5; i += 1) {
+  const scoreListItem = document.createElement('li');
+  scoreListItem.classList.add('score__item');
+  scoreList.append(scoreListItem);
+}
+table.append(scoreTitle);
+table.append(scoreList);
+
 field.append(rowclue);
 field.append(columnclue);
 
@@ -106,5 +121,7 @@ field.append(saveBtn);
 field.append(loadBtn);
 
 field.append(themeBtn);
+
+field.append(table);
 
 wrapper.append(field);

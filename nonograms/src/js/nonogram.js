@@ -31,6 +31,9 @@ const winSound = new Audio('win.wav');
 
 let saveState = {};
 
+let scoreTable = [];
+const scoreItems = document.querySelectorAll('.score__item');
+
 // не могу сделать потише почемуто?!
 // понял, я же клонирую ноду(((
 /* blackSound.volume = 0.2;
@@ -110,11 +113,55 @@ function resetField() {
   // останавливаем и очищаем таймер
   clearTimer();
 }
+function writeNewScore() {
+  scoreTable.push({
+    name: currentRiddle.name,
+    date: Date.now(),
+    level: 'easy',
+    timer: minutesDOM.innerText.concat(':', secondsDOM.innerText),
+  });
+
+  // удаляю самый ранний элемент
+  if (scoreTable.length === 6) {
+    // здесь были проблемы с console.log(scoreTable), выдывал актуальный массив
+    // не мог посмотреть нормально изменения до и после сорта, через цикл по элементам только смог
+    scoreTable.sort((a, b) => b.date - a.date);
+    scoreTable.pop();
+  }
+
+  scoreTable.sort((a, b) => {
+    const [aMinutes, aSeconds] = a.timer.split(':');
+    const [bMinutes, bSeconds] = b.timer.split(':');
+    if (
+      Number(aMinutes) > Number(bMinutes) ||
+      (Number(aMinutes) === Number(bMinutes) &&
+        Number(aSeconds) > Number(bSeconds))
+    )
+      return 1;
+    if (
+      Number(aMinutes) < Number(bMinutes) ||
+      (Number(aMinutes) === Number(bMinutes) &&
+        Number(aSeconds) < Number(bSeconds))
+    )
+      return -1;
+    return 0;
+  });
+
+  for (let i = 0; i < scoreTable.length; i += 1) {
+    scoreItems[i].innerText =
+      `${scoreTable[i].name} ${scoreTable[i].level} ${scoreTable[i].timer}`;
+  }
+
+  localStorage.setItem('nonogramScoreVK', JSON.stringify(scoreTable));
+}
 
 function closeModal() {
   // playAgainBtn.removeEventListener("click", closeModal);// не надо я так понял, если .remove() нода
   // закрываем модалку
   destroyModal();
+
+  // пишем результат в таблицу
+  writeNewScore();
 
   // восстанавлием поле
   resetField();
@@ -296,6 +343,16 @@ function load() {
 if (localStorage.getItem('nonogramVK') !== null)
   loadBtn.classList.toggle('load-btn_show');
 
+// берем таблицу из lS, если там уже есть что-то, и юзер вернулся
+if (localStorage.getItem('nonogramScoreVK') !== null) {
+  scoreTable = JSON.parse(localStorage.getItem('nonogramScoreVK'));
+
+  for (let i = 0; i < scoreTable.length; i += 1) {
+    scoreItems[i].innerText =
+      `${scoreTable[i].name} ${scoreTable[i].level} ${scoreTable[i].timer}`;
+  }
+}
+
 resetBtn.addEventListener('click', resetField);
 
 fieldCLick.onclick = (event) => {
@@ -309,6 +366,10 @@ fieldCLick.addEventListener('contextmenu', (event) => {
   // я так понял, меню можно вызвать не только мышкой
   if (event.pointerType === 'mouse') {
     const cell = event.target;
+
+    // это фикс для рклика по линиям между клеток
+    if (event.target.classList.contains('field')) event.preventDefault();
+
     if (!cell.classList.contains('field__item')) return;
 
     // убираем поведение по умолчанию

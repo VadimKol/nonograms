@@ -24,7 +24,7 @@
   }
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1099px) {
   .title {
     font-size: 50px;
     top: -120px;
@@ -92,9 +92,13 @@
     top: -160px;
     left: 280px;
   }
+  .score {
+    top: -110px;
+    left: 305px;
+  }
 }
 
-@media screen and (max-width: 699px) {
+@media screen and (max-width: 899px) {
   .wrapper {
     margin: 200px auto 0;
   }
@@ -169,6 +173,34 @@
     width: 25px;
     height: 25px;
   }
+  .score {
+    top: -80px;
+    left: 219px;
+    &__title {
+      font-size: 19px;
+    }
+    &__list {
+      font-size: 16px;
+    }
+  }
+}
+@media screen and (max-width: 699px) {
+  .theme-btn {
+    top: -155px;
+    left: 165px;
+  }
+  .title {
+    top: -182px;
+    left: -60px;
+  }
+  .score {
+    top: -123px;
+    left: -119px;
+    &__list,
+    &__title {
+      font-size: 14px;
+    }
+  }
 }
 @media screen and (max-width: 499px) {
   .btn,
@@ -177,16 +209,6 @@
   }
   .modal {
     max-width: 385px;
-  }
-  .theme-btn {
-    top: -155px;
-    left: 165px;
-  }
-}
-@media screen and (max-width: 469px) {
-  .title {
-    top: -182px;
-    left: -60px;
   }
 }
 @media screen and (max-width: 420px) {
@@ -247,6 +269,14 @@
   .theme-btn {
     top: -140px;
     left: 142px;
+  }
+  .score {
+    top: -112px;
+    left: -111px;
+    &__list,
+    &__title {
+      font-size: 13px;
+    }
   }
 }
 
