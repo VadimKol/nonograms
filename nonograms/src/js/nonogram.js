@@ -12,6 +12,7 @@ import {
 const fieldCLick = document.querySelector('.field');
 const templatesClick = document.querySelector('.templates');
 const resetBtn = document.querySelector('.reset-btn');
+const randomBtn = document.querySelector('.random-btn');
 const saveBtn = document.querySelector('.save-btn');
 const loadBtn = document.querySelector('.load-btn');
 
@@ -188,35 +189,6 @@ function changeHintsAppearance() {
   rowHints = document.querySelectorAll('.rowclue__item');
   columnHints = document.querySelectorAll('.columnclue__item');
 }
-
-function getRandomGame() {
-  currentRiddleId = getRandomInteger(0, riddles.length - 1);
-  currentRiddle = riddles[currentRiddleId];
-  currentRiddleDifficulty = currentRiddle.difficulty;
-
-  console.log('Current Nonogram is: ');
-  currentRiddle.riddle.forEach((x) => console.log(...x));
-  console.log(currentRiddle.name);
-
-  changeFieldAppearance();
-  changeHintsAppearance();
-  feedHints(rowHints, columnHints, currentRiddle);
-  feedTemplatesList(riddles, currentRiddleDifficulty);
-}
-
-(async () => {
-  try {
-    const responsePromise = await fetch('riddles.json');
-
-    if (responsePromise.ok) riddles = await responsePromise.json();
-    else throw new Error(responsePromise.status);
-
-    getRandomGame();
-  } catch (err) {
-    console.log(err);
-  }
-})();
-
 // интервал 1 секунда
 function startTimer() {
   currentTimerId = setInterval(() => {
@@ -233,7 +205,6 @@ function startTimer() {
     else minutesDOM.innerText = String(minutes);
   }, 1000);
 }
-
 function clearTimer() {
   // останавливаем таймер
   clearInterval(currentTimerId);
@@ -245,6 +216,43 @@ function clearTimer() {
   minutesDOM.innerText = '00';
   secondsDOM.innerText = '00';
 }
+function getRandomGame() {
+  let newRiddleId = currentRiddleId;
+
+  while (newRiddleId === currentRiddleId)
+    newRiddleId = getRandomInteger(0, riddles.length - 1);
+
+  currentRiddleId = newRiddleId;
+  currentRiddle = riddles[currentRiddleId];
+  currentRiddleDifficulty = currentRiddle.difficulty;
+
+  console.log('Current Nonogram is: ');
+  currentRiddle.riddle.forEach((x) => console.log(...x));
+  console.log(currentRiddle.name);
+
+  changeFieldAppearance();
+  changeHintsAppearance();
+  feedHints(rowHints, columnHints, currentRiddle);
+  feedTemplatesList(riddles, currentRiddleDifficulty);
+  clearTimer();
+
+  if (difficultyClick.classList.contains('difficulty_show'))
+    openDifficultyList();
+  if (templatesClick.classList.contains('templates_show')) openTemplatesList();
+}
+
+(async () => {
+  try {
+    const responsePromise = await fetch('riddles.json');
+
+    if (responsePromise.ok) riddles = await responsePromise.json();
+    else throw new Error(responsePromise.status);
+
+    getRandomGame();
+  } catch (err) {
+    console.log(err);
+  }
+})();
 
 function resetField() {
   // восстанавлием поле
@@ -563,6 +571,7 @@ if (localStorage.getItem('nonogramScoreVK') !== null) {
 }
 
 resetBtn.addEventListener('click', resetField);
+randomBtn.addEventListener('click', getRandomGame);
 
 fieldCLick.onclick = (event) => {
   const cell = event.target;

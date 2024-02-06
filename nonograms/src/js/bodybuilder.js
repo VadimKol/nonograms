@@ -115,6 +115,12 @@ for (let i = 0; i < 3; i += 1) {
   difficultyList.append(difficultyListItem);
 }
 
+const randomBtn = document.createElement('button');
+randomBtn.classList.add('random-btn');
+randomBtn.classList.add('btn');
+randomBtn.type = 'button';
+randomBtn.append('Random');
+
 field.append(rowclue);
 field.append(columnclue);
 field.append(verticalDivider);
@@ -123,6 +129,8 @@ field.append(horisontalDivider);
 field.append(headerText);
 
 field.append(resetBtn);
+
+field.append(randomBtn);
 
 field.append(templatesBtn);
 field.append(templatesList);

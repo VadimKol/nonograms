@@ -31,8 +31,8 @@
   }
   .title {
     font-size: 50px;
-    top: -120px;
-    left: -253px;
+    top: -241px;
+    left: -72px;
   }
   .field__item_easy,
   .rowclue__item_easy,
@@ -133,8 +133,8 @@
     left: -131px;
   }
   .theme-btn {
-    top: -160px;
-    left: 280px;
+    top: -225px;
+    left: 241px;
   }
   .score {
     top: 475px;
@@ -148,14 +148,8 @@
     bottom: -372px;
     right: 42px;
   }
-}
- @media screen and (max-width: 699px) {
-  .title {
-    top: -241px;
-    left: -72px;
-  }
-  .theme-btn {
-    top: -225px;
-    left: 241px;
+  .random-btn {
+    bottom: 361px;
+    right: 294px;
   }
 }
