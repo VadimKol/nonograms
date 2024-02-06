@@ -13,6 +13,7 @@ const fieldCLick = document.querySelector('.field');
 const templatesClick = document.querySelector('.templates');
 const resetBtn = document.querySelector('.reset-btn');
 const randomBtn = document.querySelector('.random-btn');
+const solutionBtn = document.querySelector('.solution-btn');
 const saveBtn = document.querySelector('.save-btn');
 const loadBtn = document.querySelector('.load-btn');
 
@@ -255,7 +256,7 @@ function getRandomGame() {
 })();
 
 function resetField() {
-  // восстанавлием поле
+  // восстанавливаем поле
   while (document.querySelector('.field__item_clicked') !== null)
     document
       .querySelector('.field__item_clicked')
@@ -350,6 +351,11 @@ function closeModal() {
   currentRiddle.riddle.forEach((x) => console.log(...x));
   console.log(currentRiddle.name);
 
+  // закрываем списки
+  if (difficultyClick.classList.contains('difficulty_show'))
+    openDifficultyList();
+  if (templatesClick.classList.contains('templates_show')) openTemplatesList();
+
   document.body.classList.toggle('overflow-body');
 }
 
@@ -384,23 +390,7 @@ function createModal() {
 
   document.body.append(modalBack);
 }
-function lClickLogic(cell) {
-  // клонировать ноду, может быть плохо для памяти, не пойму
-  if (
-    cell.classList.contains('field__item_r-clicked') ||
-    !cell.classList.contains('field__item_clicked')
-  )
-    blackSound.cloneNode(false).play();
-  else whiteSound.cloneNode(false).play();
-
-  // стартуем таймер при лефт клике
-  if (currentTimerId === 0) startTimer();
-
-  if (cell.classList.contains('field__item_r-clicked'))
-    cell.classList.toggle('field__item_r-clicked');
-
-  cell.classList.toggle('field__item_clicked');
-
+function checkOnWin() {
   const cellsArr = document.querySelectorAll('.field__item');
   let result = false;
   const size = LEVELSFIVE[LEVELS.indexOf(currentRiddleDifficulty)];
@@ -431,6 +421,26 @@ function lClickLogic(cell) {
     createModal();
   }
 }
+
+function lClickLogic(cell) {
+  // клонировать ноду, может быть плохо для памяти, не пойму
+  if (
+    cell.classList.contains('field__item_r-clicked') ||
+    !cell.classList.contains('field__item_clicked')
+  )
+    blackSound.cloneNode(false).play();
+  else whiteSound.cloneNode(false).play();
+
+  // стартуем таймер при лефт клике
+  if (currentTimerId === 0) startTimer();
+
+  if (cell.classList.contains('field__item_r-clicked'))
+    cell.classList.toggle('field__item_r-clicked');
+
+  cell.classList.toggle('field__item_clicked');
+
+  checkOnWin();
+}
 function rClickLogic(cell) {
   if (
     cell.classList.contains('field__item_clicked') ||
@@ -446,6 +456,10 @@ function rClickLogic(cell) {
     cell.classList.toggle('field__item_clicked');
 
   cell.classList.toggle('field__item_r-clicked');
+
+  // плохая ситуация, когда кликнули на кнопку Solution
+  // а потом райт клик по пустой клетке, это означает победа
+  checkOnWin();
 }
 
 function openNewField(event) {
@@ -570,8 +584,30 @@ if (localStorage.getItem('nonogramScoreVK') !== null) {
   }
 }
 
+function solution() {
+  // восстанавливаем поле
+  while (document.querySelector('.field__item_clicked') !== null)
+    document
+      .querySelector('.field__item_clicked')
+      .classList.toggle('field__item_clicked');
+  while (document.querySelector('.field__item_r-clicked') !== null)
+    document
+      .querySelector('.field__item_r-clicked')
+      .classList.toggle('field__item_r-clicked');
+
+  const cellsArr = document.querySelectorAll('.field__item');
+  const size = LEVELSFIVE[LEVELS.indexOf(currentRiddleDifficulty)];
+
+  for (let i = 0, j = 0; i < cellsArr.length; i += 1) {
+    if (i >= size && i % size === 0) j += 1;
+    if (currentRiddle.riddle[j][i % size] === 1)
+      cellsArr[i].classList.toggle('field__item_clicked');
+  }
+}
+
 resetBtn.addEventListener('click', resetField);
 randomBtn.addEventListener('click', getRandomGame);
+solutionBtn.addEventListener('click', solution);
 
 fieldCLick.onclick = (event) => {
   const cell = event.target;

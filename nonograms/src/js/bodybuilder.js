@@ -121,6 +121,12 @@ randomBtn.classList.add('btn');
 randomBtn.type = 'button';
 randomBtn.append('Random');
 
+const solutionBtn = document.createElement('button');
+solutionBtn.classList.add('solution-btn');
+solutionBtn.classList.add('btn');
+solutionBtn.type = 'button';
+solutionBtn.append('Solution');
+
 field.append(rowclue);
 field.append(columnclue);
 field.append(verticalDivider);
@@ -129,8 +135,8 @@ field.append(horisontalDivider);
 field.append(headerText);
 
 field.append(resetBtn);
-
 field.append(randomBtn);
+field.append(solutionBtn);
 
 field.append(templatesBtn);
 field.append(templatesList);
