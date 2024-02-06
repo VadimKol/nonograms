@@ -16,7 +16,8 @@
         cursor: pointer;
     }
   }
-  .templates__item {
+  .templates__item,
+  .difficulty__item {
     &:hover {
       cursor: pointer;
         color: var(--gray);
@@ -25,29 +26,71 @@
 }
 
 @media screen and (max-width: 1099px) {
+  .wrapper {
+    margin-top: 250px;
+  }
   .title {
     font-size: 50px;
     top: -120px;
     left: -253px;
   }
-  .field,
-  .rowclue,
-  .columnclue {
+  .field__item_easy,
+  .rowclue__item_easy,
+  .columnclue__item_easy {
     font-size: 35px;
-    &__item {
-      width: 50px;
-      height: 50px;
-      padding: 3px 0px;
-    }
+    width: 50px;
+    height: 50px;
+    padding: 3px 0px;
+  }
+  .field__item_norm,
+  .rowclue__item_norm,
+  .columnclue__item_norm {
+    font-size: 20px;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+  }
+  .field__item_hard,
+  .rowclue__item_hard,
+  .columnclue__item_hard {
+    font-size: 15px;
+    width: 16.5px;
+    height: 16.5px;
+    padding: 0;
+  }
+  .field_hard,
+  .rowclue_hard,
+  .columnclue_hard {
+    gap: 1px;
   }
   .field {
     left: 85px;
   }
-  .rowclue {
+  .field_hard {
+    grid-template-columns: repeat(5, 1fr) 3.25px repeat(5, 1fr) 3.25px repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr) 3.25px repeat(5, 1fr) 3.25px repeat(5, 1fr);
+  }
+  .rowclue_easy {
     left: -170px;
   }
-  .columnclue {
+  .rowclue_norm {
+    left: -143px;
+  }
+  .rowclue_hard{
+    grid-template-columns: repeat(3, 1fr) 3.25px repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr) 3.25px repeat(5, 1fr) 3.25px repeat(5, 1fr);
+    left: -153px;
+  }
+  .columnclue_easy {
     top: -170px;
+  }
+  .columnclue_norm {
+    top: -143px;
+  }
+  .columnclue_hard {
+    grid-template-columns: repeat(5, 1fr) 3.25px repeat(5, 1fr) 3.25px repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr) 3.25px repeat(5, 1fr);
+    top: -153px;
   }
   .vdivider {
     height: 270px;
@@ -77,13 +120,14 @@
   .timer {
     left: -80px;
     top: -40px;
+    font-size: 35px;
   }
   .save-btn,
   .load-btn {
     bottom: -164px;
   }
   .save-btn {
-    right: 30px;
+    right: 40px;
   }
   .load-btn {
     left: -131px;
@@ -93,190 +137,25 @@
     left: 280px;
   }
   .score {
-    top: -110px;
-    left: 305px;
-  }
-}
-
-@media screen and (max-width: 899px) {
-  .wrapper {
-    margin: 200px auto 0;
-  }
-  .title {
-    font-size: 35px;
-    top: -88px;
-    left: -181px;
-  }
-  .field,
-  .rowclue,
-  .columnclue {
-    font-size: 30px;
-    &__item {
-      width: 35px;
-      height: 35px;
-      padding: 0px;
-    }
-  }
-  .field {
-    left: 62.5px;
-  }
-  .rowclue {
+    top: 475px;
     left: -125px;
   }
-  .columnclue {
-    top: -125px;
+  .difficulty-btn {
+    bottom: -240px;
+    right: 6px;
   }
-  .vdivider {
-    height: 195px;
-  }
-  .hdivider {
-    width: 195px;
-  }
-  .btn,
-  .modal__msg {
-    font-size: 25px;
-  }
-  .reset-btn {
-    left: -103.365px;
-  }
-  .reset-btn,
-  .templates-btn {
-    font-size: 20px;
-    bottom: -73px;
-  }
-  .modal {
-    max-width: 475px;
-  }
-  .templates {
-    right: 128px;
-    bottom: -154px;
-    font-size: 17px;
-  }
-  .timer {
-    left: -66px;
-    top: -33px;
-  }
-  .save-btn,
-  .load-btn {
-    bottom: -131px;
-    font-size: 20px;
-  }
-  .save-btn {
-    right: 23px;
-  }
-  .load-btn {
-    left: -98px;
-  }
-  .theme-btn {
-    top: -119px;
-    left: 202px;
-    width: 25px;
-    height: 25px;
-  }
-  .score {
-    top: -80px;
-    left: 219px;
-    &__title {
-      font-size: 19px;
-    }
-    &__list {
-      font-size: 16px;
-    }
+  .difficulty {
+    bottom: -372px;
+    right: 42px;
   }
 }
-@media screen and (max-width: 699px) {
-  .theme-btn {
-    top: -155px;
-    left: 165px;
-  }
+ @media screen and (max-width: 699px) {
   .title {
-    top: -182px;
-    left: -60px;
-  }
-  .score {
-    top: -123px;
-    left: -119px;
-    &__list,
-    &__title {
-      font-size: 14px;
-    }
-  }
-}
-@media screen and (max-width: 499px) {
-  .btn,
-  .modal__msg {
-    font-size: 20px;
-  }
-  .modal {
-    max-width: 385px;
-  }
-}
-@media screen and (max-width: 420px) {
-  .modal {
-    max-width: 300px;
-  }
-}
-@media screen and (max-width: 359px) {
-  .field,
-  .rowclue,
-  .columnclue {
-    font-size: 25px;
-    &__item {
-      width: 30px;
-      height: 30px;
-    }
-  }
-  .field {
-    left: 55px;
-  }
-  .rowclue {
-    left: -110px;
-  }
-  .columnclue {
-    top: -110px;
-  }
-  .vdivider {
-    height: 170px;
-  }
-  .hdivider {
-    width: 170px;
-  }
-  .reset-btn {
-    left: -95.865px;
-  }
-  .reset-btn,
-  .templates-btn {
-    bottom: -69px;
-  }
-  .templates {
-    bottom: -223px;
-    right: 17px;
-  }
-  .timer {
-    left: -55px;
-    top: -27px;
-  }
-  .save-btn,
-  .load-btn {
-    bottom: -127px;
-  }
-  .save-btn {
-    right: 110px;
-  }
-  .load-btn {
-    left: -90px;
+    top: -241px;
+    left: -72px;
   }
   .theme-btn {
-    top: -140px;
-    left: 142px;
-  }
-  .score {
-    top: -112px;
-    left: -111px;
-    &__list,
-    &__title {
-      font-size: 13px;
-    }
+    top: -225px;
+    left: 241px;
   }
 }
-

@@ -1,4 +1,9 @@
-import { openTemplatesList, switchTheme } from './helper';
+import {
+  openTemplatesList,
+  switchTheme,
+  openDifficultyList,
+  LEVELS,
+} from './helper';
 
 const wrapper = document.createElement('div');
 wrapper.classList.add('wrapper');
@@ -12,29 +17,11 @@ document.body.append(wrapper);
 const field = document.createElement('div');
 field.classList.add('field');
 
-for (let i = 0; i < 25; i += 1) {
-  const cell = document.createElement('div');
-  cell.classList.add('field__item');
-  field.append(cell);
-}
-
 const rowclue = document.createElement('div');
 rowclue.classList.add('rowclue');
 
-for (let i = 0; i < 15; i += 1) {
-  const cell = document.createElement('div');
-  cell.classList.add('rowclue__item');
-  rowclue.append(cell);
-}
-
 const columnclue = document.createElement('div');
 columnclue.classList.add('columnclue');
-
-for (let i = 0; i < 15; i += 1) {
-  const cell = document.createElement('div');
-  cell.classList.add('columnclue__item');
-  columnclue.append(cell);
-}
 
 const verticalDivider = document.createElement('div');
 verticalDivider.classList.add('vdivider');
@@ -57,6 +44,14 @@ templatesBtn.addEventListener('click', openTemplatesList);
 
 const templatesList = document.createElement('ul');
 templatesList.classList.add('templates');
+templatesList.classList.add('list');
+
+for (let i = 0; i < 5; i += 1) {
+  const templatesItem = document.createElement('li');
+  templatesItem.classList.add('templates__item');
+  templatesItem.classList.add(`templates__item-${i + 1}`);
+  templatesList.append(templatesItem);
+}
 
 const timer = document.createElement('p');
 timer.classList.add('timer');
@@ -87,8 +82,8 @@ themeBtn.classList.add('theme-btn');
 themeBtn.type = 'button';
 themeBtn.addEventListener('click', switchTheme);
 
-const table = document.createElement('div');
-table.classList.add('score');
+const scoreTable = document.createElement('div');
+scoreTable.classList.add('score');
 const scoreTitle = document.createElement('p');
 scoreTitle.classList.add('score__title');
 scoreTitle.append('Latest 5 wins:');
@@ -99,12 +94,29 @@ for (let i = 0; i < 5; i += 1) {
   scoreListItem.classList.add('score__item');
   scoreList.append(scoreListItem);
 }
-table.append(scoreTitle);
-table.append(scoreList);
+scoreTable.append(scoreTitle);
+scoreTable.append(scoreList);
+
+const difficultyBtn = document.createElement('button');
+difficultyBtn.classList.add('difficulty-btn');
+difficultyBtn.classList.add('btn');
+difficultyBtn.type = 'button';
+difficultyBtn.append('Difficulty');
+difficultyBtn.addEventListener('click', openDifficultyList);
+
+const difficultyList = document.createElement('ul');
+difficultyList.classList.add('difficulty');
+difficultyList.classList.add('list');
+
+for (let i = 0; i < 3; i += 1) {
+  const difficultyListItem = document.createElement('li');
+  difficultyListItem.classList.add('difficulty__item');
+  difficultyListItem.append(LEVELS[i]);
+  difficultyList.append(difficultyListItem);
+}
 
 field.append(rowclue);
 field.append(columnclue);
-
 field.append(verticalDivider);
 field.append(horisontalDivider);
 
@@ -122,6 +134,9 @@ field.append(loadBtn);
 
 field.append(themeBtn);
 
-field.append(table);
+field.append(scoreTable);
+
+field.append(difficultyBtn);
+field.append(difficultyList);
 
 wrapper.append(field);
