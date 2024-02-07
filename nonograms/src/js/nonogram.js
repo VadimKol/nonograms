@@ -241,7 +241,24 @@ function getRandomGame() {
     openDifficultyList();
   if (templatesClick.classList.contains('templates_show')) openTemplatesList();
 }
+function getRandomRiddleWithCurrentDiff(difficulty) {
+  let newRiddleId = currentRiddleId;
+  let i = 1;
 
+  // бесконечный цикл
+  while (i > 0) {
+    newRiddleId = getRandomInteger(0, riddles.length - 1);
+    if (
+      difficulty === riddles[newRiddleId].difficulty &&
+      currentRiddleId !== newRiddleId
+    )
+      break;
+    i += 1;
+  }
+
+  currentRiddleId = newRiddleId;
+  currentRiddle = riddles[currentRiddleId];
+}
 (async () => {
   try {
     const responsePromise = await fetch('riddles.json');
@@ -249,7 +266,17 @@ function getRandomGame() {
     if (responsePromise.ok) riddles = await responsePromise.json();
     else throw new Error(responsePromise.status);
 
-    getRandomGame();
+    currentRiddleDifficulty = 'easy';
+
+    getRandomRiddleWithCurrentDiff(currentRiddleDifficulty);
+    changeFieldAppearance();
+    changeHintsAppearance();
+    feedHints(rowHints, columnHints, currentRiddle);
+    feedTemplatesList(riddles, currentRiddleDifficulty);
+
+    console.log('Current Nonogram is: ');
+    currentRiddle.riddle.forEach((x) => console.log(...x));
+    console.log(currentRiddle.name);
   } catch (err) {
     console.log(err);
   }
@@ -309,25 +336,6 @@ function writeNewScore() {
   }
 
   localStorage.setItem('nonogramScoreVK', JSON.stringify(scoreTable));
-}
-
-function getRandomRiddleWithCurrentDiff(difficulty) {
-  let newRiddleId = currentRiddleId;
-  let i = 1;
-
-  // бесконечный цикл
-  while (i > 0) {
-    newRiddleId = getRandomInteger(0, riddles.length - 1);
-    if (
-      difficulty === riddles[newRiddleId].difficulty &&
-      currentRiddleId !== newRiddleId
-    )
-      break;
-    i += 1;
-  }
-
-  currentRiddleId = newRiddleId;
-  currentRiddle = riddles[currentRiddleId];
 }
 
 function closeModal() {
