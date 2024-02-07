@@ -11,6 +11,12 @@
       transform: rotate(67.5deg);
     }
   }
+  .sound-btn {
+    &:hover {
+        cursor: pointer;
+          background-color: transparent;
+    }
+  }
   .field__item {
     &:hover {
         cursor: pointer;
@@ -134,7 +140,7 @@
   }
   .theme-btn {
     top: -225px;
-    left: 241px;
+    left: 202px;
   }
   .score {
     top: 475px;
@@ -155,5 +161,9 @@
   .solution-btn {
     bottom: 304px;
     right: 278px;
+  }
+  .sound-btn {
+    right: -3px;
+    top: -225px;
   }
 }

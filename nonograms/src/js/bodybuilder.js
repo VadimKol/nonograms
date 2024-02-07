@@ -127,6 +127,10 @@ solutionBtn.classList.add('btn');
 solutionBtn.type = 'button';
 solutionBtn.append('Solution');
 
+const soundBtn = document.createElement('button');
+soundBtn.classList.add('sound-btn');
+soundBtn.type = 'button';
+
 field.append(rowclue);
 field.append(columnclue);
 field.append(verticalDivider);
@@ -137,6 +141,7 @@ field.append(headerText);
 field.append(resetBtn);
 field.append(randomBtn);
 field.append(solutionBtn);
+field.append(soundBtn);
 
 field.append(templatesBtn);
 field.append(templatesList);

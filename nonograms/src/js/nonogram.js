@@ -14,6 +14,7 @@ const templatesClick = document.querySelector('.templates');
 const resetBtn = document.querySelector('.reset-btn');
 const randomBtn = document.querySelector('.random-btn');
 const solutionBtn = document.querySelector('.solution-btn');
+const soundBtn = document.querySelector('.sound-btn');
 const saveBtn = document.querySelector('.save-btn');
 const loadBtn = document.querySelector('.load-btn');
 
@@ -25,6 +26,7 @@ let currentRiddleDifficulty;
 let minutes = 0;
 let seconds = 0;
 let currentTimerId = 0;
+let volume = 0.5;
 const minutesDOM = document.querySelector('.timer__minutes');
 const secondsDOM = document.querySelector('.timer__seconds');
 
@@ -35,13 +37,6 @@ const blackSound = new Audio('black.wav');
 const crossSound = new Audio('cross.wav');
 const whiteSound = new Audio('white.wav');
 const winSound = new Audio('win.wav');
-
-// не могу сделать потише почемуто?!
-// понял, я же клонирую ноду(((
-/* blackSound.volume = 0.2;
-crossSound.volume = 0.2;
-whiteSound.volume = 0.2; */
-winSound.volume = 0.5;
 
 let saveState = {};
 
@@ -422,6 +417,7 @@ function checkOnWin() {
     // два звука одновременно из-за логики поиска победы
     // и определения, когда проигрывается звук
     // приходится сделать небольшой делей
+    winSound.volume = volume;
     setTimeout(() => {
       winSound.play();
     }, 250);
@@ -435,9 +431,15 @@ function lClickLogic(cell) {
   if (
     cell.classList.contains('field__item_r-clicked') ||
     !cell.classList.contains('field__item_clicked')
-  )
-    blackSound.cloneNode(false).play();
-  else whiteSound.cloneNode(false).play();
+  ) {
+    const temp = blackSound.cloneNode(false);
+    temp.volume = volume;
+    temp.play();
+  } else {
+    const temp = whiteSound.cloneNode(false);
+    temp.volume = volume;
+    temp.play();
+  }
 
   // стартуем таймер при лефт клике
   if (currentTimerId === 0) startTimer();
@@ -453,9 +455,15 @@ function rClickLogic(cell) {
   if (
     cell.classList.contains('field__item_clicked') ||
     !cell.classList.contains('field__item_r-clicked')
-  )
-    crossSound.cloneNode(false).play();
-  else whiteSound.cloneNode(false).play();
+  ) {
+    const temp = crossSound.cloneNode(false);
+    temp.volume = volume;
+    temp.play();
+  } else {
+    const temp = whiteSound.cloneNode(false);
+    temp.volume = volume;
+    temp.play();
+  }
 
   // райт клике
   if (currentTimerId === 0) startTimer();
@@ -612,6 +620,12 @@ function solution() {
       cellsArr[i].classList.toggle('field__item_clicked');
   }
 }
+function changeVolume() {
+  if (soundBtn.classList.contains('sound-btn-off')) {
+    volume = 0.5;
+  } else volume = 0.0;
+  soundBtn.classList.toggle('sound-btn-off');
+}
 
 resetBtn.addEventListener('click', resetField);
 randomBtn.addEventListener('click', getRandomGame);
@@ -654,3 +668,5 @@ saveBtn.addEventListener('click', save);
 loadBtn.addEventListener('click', load);
 
 difficultyClick.addEventListener('click', changeDifficulty);
+
+soundBtn.addEventListener('click', changeVolume);

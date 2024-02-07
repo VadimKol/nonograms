@@ -232,6 +232,14 @@ ul {
   bottom: 30px;
   right: -192px;
 }
+.sound-btn {
+  position: absolute;
+  top: -230px;
+  right: -90px;
+  width: 30px;
+  height: 30px;
+  background-image: url(../assets/img/sound_on.svg);
+}
 
 // js
 .overflow-body {
@@ -346,4 +354,8 @@ ul {
   width: 25px;
   height: 25px;
   padding: 0;
+}
+
+.sound-btn-off {
+  background-image: url(../assets/img/sound_off.svg);
 }
