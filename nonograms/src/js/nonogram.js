@@ -7,6 +7,7 @@ import {
   openDifficultyList,
   LEVELS,
   LEVELSFIVE,
+  feedName,
 } from './helper';
 
 const fieldCLick = document.querySelector('.field');
@@ -22,6 +23,7 @@ let riddles;
 let currentRiddle;
 let currentRiddleId;
 let currentRiddleDifficulty;
+let currentRiddleName;
 
 let minutes = 0;
 let seconds = 0;
@@ -221,6 +223,7 @@ function getRandomGame() {
   currentRiddleId = newRiddleId;
   currentRiddle = riddles[currentRiddleId];
   currentRiddleDifficulty = currentRiddle.difficulty;
+  currentRiddleName = currentRiddle.name;
 
   console.log('Current Nonogram is: ');
   currentRiddle.riddle.forEach((x) => console.log(...x));
@@ -230,6 +233,7 @@ function getRandomGame() {
   changeHintsAppearance();
   feedHints(rowHints, columnHints, currentRiddle);
   feedTemplatesList(riddles, currentRiddleDifficulty);
+  feedName(currentRiddleName);
   clearTimer();
 
   if (difficultyClick.classList.contains('difficulty_show'))
@@ -253,6 +257,7 @@ function getRandomRiddleWithCurrentDiff(difficulty) {
 
   currentRiddleId = newRiddleId;
   currentRiddle = riddles[currentRiddleId];
+  currentRiddleName = currentRiddle.name;
 }
 (async () => {
   try {
@@ -268,6 +273,7 @@ function getRandomRiddleWithCurrentDiff(difficulty) {
     changeHintsAppearance();
     feedHints(rowHints, columnHints, currentRiddle);
     feedTemplatesList(riddles, currentRiddleDifficulty);
+    feedName(currentRiddleName);
 
     console.log('Current Nonogram is: ');
     currentRiddle.riddle.forEach((x) => console.log(...x));
@@ -287,6 +293,10 @@ function resetField() {
     document
       .querySelector('.field__item_r-clicked')
       .classList.toggle('field__item_r-clicked');
+  while (document.querySelector('.field__item_s-clicked') !== null)
+    document
+      .querySelector('.field__item_s-clicked')
+      .classList.toggle('field__item_s-clicked');
 
   // останавливаем и очищаем таймер
   clearTimer();
@@ -346,6 +356,8 @@ function closeModal() {
 
   // берем новую загадку
   getRandomRiddleWithCurrentDiff(currentRiddleDifficulty);
+
+  feedName(currentRiddleName);
 
   // обновляем подсказки
   feedHints(rowHints, columnHints, currentRiddle);
@@ -447,6 +459,9 @@ function lClickLogic(cell) {
   if (cell.classList.contains('field__item_r-clicked'))
     cell.classList.toggle('field__item_r-clicked');
 
+  if (cell.classList.contains('field__item_s-clicked'))
+    cell.classList.toggle('field__item_s-clicked');
+
   cell.classList.toggle('field__item_clicked');
 
   checkOnWin();
@@ -471,6 +486,9 @@ function rClickLogic(cell) {
   if (cell.classList.contains('field__item_clicked'))
     cell.classList.toggle('field__item_clicked');
 
+  if (cell.classList.contains('field__item_s-clicked'))
+    cell.classList.toggle('field__item_s-clicked');
+
   cell.classList.toggle('field__item_r-clicked');
 
   // плохая ситуация, когда кликнули на кнопку Solution
@@ -491,6 +509,9 @@ function openNewField(event) {
     5 * LEVELS.indexOf(currentRiddleDifficulty);
   currentRiddle = riddles[currentRiddleId];
   currentRiddleDifficulty = currentRiddle.difficulty;
+  currentRiddleName = currentRiddle.name;
+
+  feedName(currentRiddleName);
 
   feedHints(rowHints, columnHints, currentRiddle);
 
@@ -521,6 +542,7 @@ function changeDifficulty(event) {
   changeHintsAppearance();
   feedHints(rowHints, columnHints, currentRiddle);
   feedTemplatesList(riddles, currentRiddleDifficulty);
+  feedName(currentRiddleName);
 
   console.log('Current Nonogram is: ');
   currentRiddle.riddle.forEach((x) => console.log(...x));
@@ -537,6 +559,7 @@ function save() {
   saveState.currentRiddle = currentRiddle;
   saveState.currentRiddleId = currentRiddleId;
   saveState.currentRiddleDifficulty = currentRiddleDifficulty;
+  saveState.currentRiddleName = currentRiddle.name;
   saveState.field = Array.from({ length: size * size }, () => 0);
 
   const fieldItems = document.querySelectorAll('.field__item');
@@ -557,6 +580,7 @@ function load() {
   currentRiddle = saveState.currentRiddle;
   currentRiddleId = saveState.currentRiddleId;
   currentRiddleDifficulty = saveState.currentRiddleDifficulty;
+  currentRiddleName = saveState.currentRiddleName;
 
   // меняем поле от сложности
   changeFieldAppearance();
@@ -570,6 +594,8 @@ function load() {
     else if (saveState.field[i] === 2)
       fieldItems[i].classList.toggle('field__item_r-clicked');
   }
+
+  feedName(currentRiddleName);
 
   feedHints(rowHints, columnHints, currentRiddle);
 
@@ -617,7 +643,7 @@ function solution() {
   for (let i = 0, j = 0; i < cellsArr.length; i += 1) {
     if (i >= size && i % size === 0) j += 1;
     if (currentRiddle.riddle[j][i % size] === 1)
-      cellsArr[i].classList.toggle('field__item_clicked');
+      cellsArr[i].classList.toggle('field__item_s-clicked');
   }
 }
 function changeVolume() {

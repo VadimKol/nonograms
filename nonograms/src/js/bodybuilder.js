@@ -12,6 +12,9 @@ const headerText = document.createElement('h1');
 headerText.classList.add('title');
 headerText.append('Nonograms');
 
+const riddleName = document.createElement('p');
+riddleName.classList.add('name');
+
 document.body.append(wrapper);
 
 const field = document.createElement('div');
@@ -137,6 +140,8 @@ field.append(verticalDivider);
 field.append(horisontalDivider);
 
 field.append(headerText);
+
+field.append(riddleName);
 
 field.append(resetBtn);
 field.append(randomBtn);

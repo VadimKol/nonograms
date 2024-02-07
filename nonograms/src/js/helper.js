@@ -63,3 +63,6 @@ export function feedTemplatesList(riddles, difficulty) {
     }
   }
 }
+export function feedName(name) {
+  document.querySelector('.name').innerText = name;
+}

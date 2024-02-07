@@ -40,6 +40,12 @@
     top: -241px;
     left: -72px;
   }
+  .name {
+    top: 450px;
+    left: -130px;
+    right: auto;
+    font-size: 30px;
+  }
   .field__item_easy,
   .rowclue__item_easy,
   .columnclue__item_easy {
@@ -143,7 +149,7 @@
     left: 202px;
   }
   .score {
-    top: 475px;
+    top: 500px;
     left: -125px;
   }
   .difficulty-btn {

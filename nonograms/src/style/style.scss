@@ -7,6 +7,7 @@
   --back-templates: #f5deb3;
   --white: #ffffff;
   --black: #000000;
+  --red: #ff0000;
   --gray: #808080;
   --cell-clr: #7fff00;
   --cross: url(../assets/img/cross.svg);
@@ -67,6 +68,13 @@ ul {
   left: -333px;
   font-size: 65px;
 }
+.name {
+  position: absolute;
+  top: -294px;
+  left: 0;
+  right: 0;
+  font-size: 40px;
+}
 .field,
 .rowclue,
 .columnclue {
@@ -92,6 +100,9 @@ ul {
     &_r-clicked {
       background-image: var(--cross);
       background-size: cover;
+    }
+    &_s-clicked {
+      background-color: var(--red);
     }
   }
 }
