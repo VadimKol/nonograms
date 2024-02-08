@@ -12,6 +12,8 @@
   --cell-clr: #7fff00;
   --cross: url(../assets/img/cross.svg);
   --sun: url(../assets/img/sun_dark.svg);
+  --sound-on: url(../assets/img/sound_dark.svg);
+  --sound-off: url(../assets/img/mute_dark.svg);
 }
 
 .body-dark-theme {
@@ -25,6 +27,8 @@
   --cell-clr: #264d00;
   --cross: url(../assets/img/cross_light.svg);
   --sun: url(../assets/img/sun.svg);
+  --sound-on: url(../assets/img/sound.svg);
+  --sound-off: url(../assets/img/mute.svg);
 }
 
 h1, h2, h3, h4, h5, h6, ul, ol, p {
@@ -249,7 +253,8 @@ ul {
   right: -90px;
   width: 30px;
   height: 30px;
-  background-image: url(../assets/img/sound_on.svg);
+  background-image: var(--sound-on);
+  background-size: cover;
 }
 
 // js
@@ -368,5 +373,5 @@ ul {
 }
 
 .sound-btn-off {
-  background-image: url(../assets/img/sound_off.svg);
+  background-image: var(--sound-off);
 }
