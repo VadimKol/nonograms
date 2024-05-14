@@ -102,21 +102,3 @@ dist
 
 # TernJS port file
 .tern-port
-
-# eslint
-.eslintrc.json
-
-# prettier
-.prettierrc
-
-# package-lock.json
-package-lock.json
-
-# package.json
-package.json
-
-# editorconfig
-.editorconfig
-
-# webpack
-webpack.config.js
